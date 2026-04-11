@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Qué Cultura Eres? - Empresas Mexicanas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        header {
+            background: #d32f2f;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .logo {
+            max-width: 160px;     /* Logo más pequeño como pediste */
+            margin-bottom: 10px;
+        }
+        h1 {
+            margin: 8px 0 5px 0;
+            font-size: 2.1em;
+        }
+        .subtitle {
+            font-size: 1.15em;
+            margin: 0;
+            opacity: 0.95;
+        }
+        .content {
+            padding: 30px;
+        }
+        .question {
+            margin-bottom: 35px;
+            display: none;
+        }
+        .question.active {
+            display: block;
+        }
+        h2 {
+            color: #d32f2f;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .option {
+            padding: 16px;
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.05em;
+        }
+        .option:hover {
+            background: #e3f2fd;
+            border-color: #2196f3;
+        }
+        .option.selected {
+            background: #e8f5e9;
+            border-color: #4caf50;
+            font-weight: bold;
+        }
+        button {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background: #b71c1c;
+        }
+        .result {
+            text-align: center;
+            display: none;
+        }
+        .culture-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 8px solid #d32f2f;
+        }
+        .emoji {
+            font-size: 3.8em;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo_utel_con_fondo-removebg-preview.png" alt="Logo UTEL" class="logo">
+            <h1>¿Qué Cultura Eres?</h1>
+            <p class="subtitle">Empresas Mexicanas Edition 🇲🇽</p>
+        </header>
+
+        <div class="content">
+            <!-- Cuestionario -->
+            <div id="quiz">
+                <h2 id="question-text">Pregunta 1 de 5</h2>
+                <div class="options" id="options"></div>
+                <button onclick="nextQuestion()" id="next-btn" style="display:none;">Siguiente →</button>
+            </div>
+
+            <!-- Resultado -->
+            <div id="result" class="result">
+                <h2>¡Felicidades! Tu cultura es:</h2>
+                <div id="culture-result" class="culture-card"></div>
+                
+                <h3>¿Qué significa esto?</h3>
+                <p id="description"></p>
+                
+                <h3>Beneficios principales:</h3>
+                <ul id="benefits"></ul>
+                
+                <h3>Ejemplos de empresas mexicanas:</h3>
+                <p id="examples" style="font-weight: bold; color: #d32f2f; font-size: 1.1em;"></p>
+
+                <button onclick="reiniciarJuego()">Jugar de nuevo</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const preguntas = [
+            {
+                pregunta: "En el trabajo, ¿qué valoras más?",
+                opciones: [
+                    { texto: "Sentirme parte de una familia y que me apoyen", valor: "familiar" },
+                    { texto: "Poder proponer ideas nuevas y creativas", valor: "creativa" },
+                    { texto: "Ganar, competir y obtener buenos resultados", valor: "competitiva" },
+                    { texto: "Que todo esté bien organizado y con reglas claras", valor: "estructurada" }
+                ]
+            },
+            {
+                pregunta: "Cuando hay un problema en la empresa, ¿qué prefieres?",
+                opciones: [
+                    { texto: "Que todos nos reunamos y lo resolvamos juntos como equipo", valor: "familiar" },
+                    { texto: "Probar soluciones nuevas aunque sean arriesgadas", valor: "creativa" },
+                    { texto: "Que se tome la decisión que más beneficie las ventas o ganancias", valor: "competitiva" },
+                    { texto: "Seguir el procedimiento establecido y respetar la cadena de mando", valor: "estructurada" }
+                ]
+            },
+            {
+                pregunta: "¿Cómo te gustaría que sea tu jefe?",
+                opciones: [
+                    { texto: "Como un líder cercano, que se preocupe por mí", valor: "familiar" },
+                    { texto: "Alguien que motive la innovación y las ideas locas", valor: "creativa" },
+                    { texto: "Alguien exigente que me impulse a dar lo mejor", valor: "competitiva" },
+                    { texto: "Alguien claro que dé instrucciones precisas y justas", valor: "estructurada" }
+                ]
+            },
+            {
+                pregunta: "En una empresa ideal, ¿qué es más importante?",
+                opciones: [
+                    { texto: "La lealtad y el buen ambiente entre compañeros", valor: "familiar" },
+                    { texto: "La creatividad y adaptarse rápido a los cambios", valor: "creativa" },
+                    { texto: "Ser mejor que la competencia y crecer constantemente", valor: "competitiva" },
+                    { texto: "La eficiencia, el orden y el control de procesos", valor: "estructurada" }
+                ]
+            },
+            {
+                pregunta: "Cuando hay un cambio grande en la empresa, ¿cómo reaccionas?",
+                opciones: [
+                    { texto: "Me preocupa si afecta al equipo y las relaciones", valor: "familiar" },
+                    { texto: "¡Me emociona! Es una oportunidad para innovar", valor: "creativa" },
+                    { texto: "Lo veo como una oportunidad para ganar más mercado", valor: "competitiva" },
+                    { texto: "Prefiero que se planee bien y se comunique claramente", valor: "estructurada" }
+                ]
+            }
+        ];
+
+        let respuestas = [];
+        let preguntaActual = 0;
+
+        function mostrarPregunta() {
+            document.getElementById("question-text").textContent = `Pregunta ${preguntaActual + 1} de ${preguntas.length}`;
+            const optionsDiv = document.getElementById("options");
+            optionsDiv.innerHTML = "";
+
+            preguntas[preguntaActual].opciones.forEach((opcion, index) => {
+                const div = document.createElement("div");
+                div.className = "option";
+                div.textContent = opcion.texto;
+                div.onclick = () => seleccionarRespuesta(index);
+                optionsDiv.appendChild(div);
+            });
+
+            document.getElementById("next-btn").style.display = "none";
+        }
+
+        function seleccionarRespuesta(index) {
+            respuestas[preguntaActual] = preguntas[preguntaActual].opciones[index].valor;
+            
+            const options = document.querySelectorAll(".option");
+            options.forEach((opt, i) => {
+                if (i === index) opt.classList.add("selected");
+                else opt.classList.remove("selected");
+            });
+
+            document.getElementById("next-btn").style.display = "block";
+        }
+
+        function nextQuestion() {
+            preguntaActual++;
+            if (preguntaActual < preguntas.length) {
+                mostrarPregunta();
+            } else {
+                mostrarResultado();
+            }
+        }
+
+        function calcularCultura() {
+            const conteo = { familiar: 0, creativa: 0, competitiva: 0, estructurada: 0 };
+            respuestas.forEach(res => conteo[res]++);
+            
+            let max = 0;
+            let culturaGanadora = "familiar";
+            for (let tipo in conteo) {
+                if (conteo[tipo] > max) {
+                    max = conteo[tipo];
+                    culturaGanadora = tipo;
+                }
+            }
+            return culturaGanadora;
+        }
+
+        function mostrarResultado() {
+            document.getElementById("quiz").style.display = "none";
+            const resultDiv = document.getElementById("result");
+            resultDiv.style.display = "block";
+
+            const tipo = calcularCultura();
+            let titulo = "", emoji = "", descripcion = "", beneficios = [], ejemplos = "";
+
+            if (tipo === "familiar") {
+                titulo = "Cultura Familiar";
+                emoji = "👨‍👩‍👧‍👦";
+                descripcion = "Es como trabajar en una gran familia. Se valora mucho la confianza, el apoyo mutuo y la lealtad.";
+                beneficios = ["Alta motivación y compromiso", "Baja rotación de personal", "Buen clima laboral", "Colaboración entre equipos"];
+                ejemplos = "Grupo Bimbo, FEMSA (OXXO), Liverpool";
+            } else if (tipo === "creativa") {
+                titulo = "Cultura Creativa / Innovadora";
+                emoji = "💡";
+                descripcion = "Se fomenta la creatividad, las ideas nuevas y la capacidad de adaptarse rápidamente.";
+                beneficios = ["Alta innovación", "Adaptación rápida al mercado", "Atracción de talento joven", "Ambiente dinámico"];
+                ejemplos = "Cinépolis, Kavak, Clip";
+            } else if (tipo === "competitiva") {
+                titulo = "Cultura Competitiva";
+                emoji = "🏆";
+                descripcion = "Se enfoca en los resultados, la competencia y en ser los mejores del mercado.";
+                beneficios = ["Crecimiento rápido", "Alta productividad", "Fuerte posicionamiento en el mercado", "Recompensas por desempeño"];
+                ejemplos = "América Móvil (Telcel), Grupo Salinas (Elektra)";
+            } else {
+                titulo = "Cultura Estructurada / de Orden";
+                emoji = "📋";
+                descripcion = "Todo está bien organizado, con procesos claros, reglas definidas y estructura jerárquica.";
+                beneficios = ["Estabilidad", "Eficiencia operativa", "Menor margen de error", "Claridad en roles"];
+                ejemplos = "Banorte, Cemex";
+            }
+
+            document.getElementById("culture-result").innerHTML = `<span class="emoji">${emoji}</span><h2>${titulo}</h2>`;
+            document.getElementById("description").textContent = descripcion;
+            
+            const benefitsList = document.getElementById("benefits");
+            benefitsList.innerHTML = "";
+            beneficios.forEach(b => {
+                const li = document.createElement("li");
+                li.textContent = "• " + b;
+                benefitsList.appendChild(li);
+            });
+
+            document.getElementById("examples").textContent = ejemplos;
+        }
+
+        function reiniciarJuego() {
+            respuestas = [];
+            preguntaActual = 0;
+            document.getElementById("quiz").style.display = "block";
+            document.getElementById("result").style.display = "none";
+            mostrarPregunta();
+        }
+
+        // Iniciar
+        window.onload = mostrarPregunta;
+    </script>
+</body>
+</html>
