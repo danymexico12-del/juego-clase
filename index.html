@@ -110,13 +110,15 @@
         ul {
             list-style: none;
             padding: 0;
+            text-align: left;
+            display: inline-block;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <img src="logo_utel_con_fondo-removebg-preview.png" alt="Logo UTEL" class="logo">
+            <img src="https://static.utel.edu.mx/img/logo-utel.png" alt="Logo UTEL" class="logo">
             <h1>¿Qué Cultura Eres?</h1>
             <p class="subtitle">Empresas Mexicanas Edition 🇲🇽</p>
         </header>
@@ -134,7 +136,9 @@
                 <h3>¿Qué significa esto?</h3>
                 <p id="description"></p>
                 <h3>Beneficios principales:</h3>
-                <ul id="benefits"></ul>
+                <div style="text-align: center;">
+                    <ul id="benefits"></ul>
+                </div>
                 <h3>Ejemplos de empresas mexicanas:</h3>
                 <p id="examples" style="font-weight: bold; color: #d32f2f; font-size: 1.1em;"></p>
                 <button onclick="reiniciarJuego()">Jugar de nuevo</button>
@@ -198,7 +202,6 @@
             document.getElementById("question-text").textContent = `Pregunta ${preguntaActual + 1} de ${preguntas.length}`;
             const optionsDiv = document.getElementById("options");
             optionsDiv.innerHTML = "";
-
             preguntas[preguntaActual].opciones.forEach((opcion, index) => {
                 const div = document.createElement("div");
                 div.className = "option";
@@ -206,7 +209,6 @@
                 div.onclick = () => seleccionarRespuesta(index);
                 optionsDiv.appendChild(div);
             });
-
             document.getElementById("next-btn").style.display = "none";
         }
 
@@ -245,53 +247,44 @@
 
         function mostrarResultado() {
             document.getElementById("quiz").style.display = "none";
-            const resultDiv = document.getElementById("result");
-            resultDiv.style.display = "block";
-
+            document.getElementById("result").style.display = "block";
             const tipo = calcularCultura();
             let titulo = "", emoji = "", descripcion = "", beneficios = [], ejemplos = "";
 
             if (tipo === "familiar") {
-                titulo = "Cultura Familiar";
-                emoji = "👨‍👩‍👧‍👦";
+                titulo = "Cultura Familiar"; emoji = "👨‍👩‍👧‍👦";
                 descripcion = "Es como trabajar en una gran familia. Se valora mucho la confianza, el apoyo mutuo y la lealtad.";
-                beneficios = ["Alta motivación y compromiso", "Baja rotación de personal", "Buen clima laboral", "Colaboración entre equipos"];
+                beneficios = ["Alta motivación y compromiso", "Baja rotación de personal", "Buen clima laboral"];
                 ejemplos = "Grupo Bimbo, FEMSA (OXXO), Liverpool";
             } else if (tipo === "creativa") {
-                titulo = "Cultura Creativa / Innovadora";
-                emoji = "💡";
+                titulo = "Cultura Creativa"; emoji = "💡";
                 descripcion = "Se fomenta la creatividad, las ideas nuevas y la capacidad de adaptarse rápidamente.";
-                beneficios = ["Alta innovación", "Adaptación rápida al mercado", "Atracción de talento joven", "Ambiente dinámico"];
+                beneficios = ["Alta innovación", "Adaptación rápida al mercado", "Ambiente dinámico"];
                 ejemplos = "Cinépolis, Kavak, Clip";
             } else if (tipo === "competitiva") {
-                titulo = "Cultura Competitiva";
-                emoji = "🏆";
+                titulo = "Cultura Competitiva"; emoji = "🏆";
                 descripcion = "Se enfoca en los resultados, la competencia y en ser los mejores del mercado.";
-                beneficios = ["Crecimiento rápido", "Alta productividad", "Fuerte posicionamiento en el mercado", "Recompensas por desempeño"];
-                ejemplos = "América Móvil (Telcel), Grupo Salinas (Elektra)";
+                beneficios = ["Crecimiento rápido", "Alta productividad", "Recompensas por desempeño"];
+                ejemplos = "América Móvil (Telcel), Grupo Salinas";
             } else {
-                titulo = "Cultura Estructurada / de Orden";
-                emoji = "📋";
-                descripcion = "Todo está bien organizado, con procesos claros, reglas definidas y estructura jerárquica.";
-                beneficios = ["Estabilidad", "Eficiencia operativa", "Menor margen de error", "Claridad en roles"];
+                titulo = "Cultura Estructurada"; emoji = "📋";
+                descripcion = "Todo está bien organizado, con procesos claros, reglas definidas y orden.";
+                beneficios = ["Estabilidad", "Eficiencia operativa", "Claridad en roles"];
                 ejemplos = "Banorte, Cemex";
             }
 
             document.getElementById("culture-result").innerHTML = `<span class="emoji">${emoji}</span><h2>${titulo}</h2>`;
             document.getElementById("description").textContent = descripcion;
-            const benefitsList = document.getElementById("benefits");
-            benefitsList.innerHTML = "";
+            const bList = document.getElementById("benefits");
+            bList.innerHTML = "";
             beneficios.forEach(b => {
-                const li = document.createElement("li");
-                li.textContent = "• " + b;
-                benefitsList.appendChild(li);
+                const li = document.createElement("li"); li.textContent = "• " + b; bList.appendChild(li);
             });
             document.getElementById("examples").textContent = ejemplos;
         }
 
         function reiniciarJuego() {
-            respuestas = [];
-            preguntaActual = 0;
+            respuestas = []; preguntaActual = 0;
             document.getElementById("quiz").style.display = "block";
             document.getElementById("result").style.display = "none";
             mostrarPregunta();
