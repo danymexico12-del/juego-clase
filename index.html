@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¿Qué Cultura Organizacional Eres? | Empresas Mexicanas</title>
+    <title>¿Qué Cultura Organizacional Eres?</title>
     <style>
         :root {
             --primary: #c62828;
-            --secondary: #1e88e5;
-            --accent: #43a047;
-            --dark: #1a1a1a;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Segoe UI', system-ui, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
-            color: #333;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px;
         }
 
         .container {
@@ -27,111 +27,106 @@
             margin: 0 auto;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
             overflow: hidden;
         }
 
         header {
             background: linear-gradient(135deg, var(--primary), #e53935);
             color: white;
-            padding: 40px 30px;
+            padding: 35px 20px;
             text-align: center;
-            position: relative;
         }
 
         .logo {
-            max-width: 190px;
-            margin-bottom: 15px;
+            max-width: 170px;
+            margin-bottom: 12px;
         }
 
         h1 {
-            font-size: 2.6em;
-            font-weight: 700;
+            font-size: 2.1em;
             margin-bottom: 8px;
         }
 
         .subtitle {
-            font-size: 1.35em;
-            opacity: 0.95;
-        }
-
-        .badge {
-            position: absolute;
-            top: 25px;
-            right: 30px;
-            background: rgba(255,255,255,0.2);
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 0.95em;
+            font-size: 1.15em;
+            opacity: 0.9;
         }
 
         .content {
-            padding: 45px 40px;
+            padding: 30px 20px;
         }
 
         .progress {
             height: 6px;
-            background: #e2e8f0;
-            margin-bottom: 35px;
+            background: #e0e0e0;
             border-radius: 10px;
+            margin-bottom: 25px;
             overflow: hidden;
         }
 
         .progress-bar {
             height: 100%;
-            background: linear-gradient(to right, var(--primary), #ef5350);
+            background: linear-gradient(to right, #c62828, #ef5350);
             width: 0%;
-            transition: width 0.4s ease;
+            transition: width 0.4s;
         }
 
         #question-text {
-            font-size: 1.55em;
-            color: var(--dark);
-            margin-bottom: 32px;
+            font-size: 1.45em;
             font-weight: 600;
+            margin-bottom: 25px;
+            text-align: center;
         }
 
         .options {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 14px;
         }
 
         .option {
-            padding: 22px 24px;
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 16px;
+            padding: 18px 20px;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 14px;
             cursor: pointer;
-            transition: all 0.4s;
-            font-size: 1.1em;
+            font-size: 1.08em;
+            transition: all 0.3s;
         }
 
         .option:hover {
-            border-color: var(--secondary);
-            background: #f0f9ff;
-            transform: translateY(-4px);
+            border-color: #1e88e5;
+            background: #e3f2fd;
         }
 
         .option.selected {
-            background: #f0fdf4;
-            border-color: var(--accent);
+            background: #e8f5e9;
+            border-color: #43a047;
+            font-weight: 600;
         }
 
         .navigation {
             display: flex;
             justify-content: space-between;
-            margin-top: 40px;
-            gap: 15px;
+            margin-top: 30px;
+            gap: 12px;
         }
 
         button {
-            padding: 16px 36px;
+            flex: 1;
+            padding: 16px;
             font-size: 1.1em;
             font-weight: 600;
-            border: none;
             border-radius: 12px;
+            border: none;
             cursor: pointer;
+        }
+
+        #prev-btn {
+            background: #f1f5f9;
+            color: #555;
+            border: 2px solid #ddd;
         }
 
         #next-btn {
@@ -139,10 +134,29 @@
             color: white;
         }
 
-        #prev-btn {
-            background: transparent;
-            color: #64748b;
-            border: 2px solid #cbd5e1;
+        .result {
+            display: none;
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        .culture-card {
+            background: #f8fafc;
+            padding: 30px 20px;
+            border-radius: 18px;
+            margin: 20px 0;
+        }
+
+        .emoji {
+            font-size: 4.5em;
+            margin-bottom: 15px;
+        }
+
+        @media (min-width: 768px) {
+            h1 { font-size: 2.6em; }
+            .content { padding: 45px 40px; }
+            .option { font-size: 1.15em; padding: 22px 24px; }
+            .emoji { font-size: 5.8em; }
         }
     </style>
 </head>
@@ -151,8 +165,7 @@
         <header>
             <img src="https://i.postimg.cc/LJc7x94j/logo-utel.png" alt="Logo UTEL" class="logo">
             <h1>¿Qué Cultura Organizacional Eres?</h1>
-            <p class="subtitle">Descubre con qué tipo de empresa mexicana te identificas más</p>
-            <div class="badge">Empresas Mexicanas Edition 🇲🇽</div>
+            <p class="subtitle">Empresas Mexicanas Edition 🇲🇽</p>
         </header>
 
         <div class="content">
@@ -170,20 +183,20 @@
                 </div>
             </div>
 
-            <div id="result" class="result" style="display: none; text-align: center;">
+            <div id="result" class="result">
                 <h2>¡Felicidades! Esta es tu cultura:</h2>
-                <div id="culture-result" style="background: #f8fafc; border-radius: 20px; padding: 40px; margin: 30px 0; border: 1px solid #e2e8f0;"></div>
+                <div id="culture-result" class="culture-card"></div>
 
                 <h3>¿Qué significa esto?</h3>
-                <p id="description" style="font-size: 1.15em; max-width: 620px; margin: 0 auto 25px;"></p>
+                <p id="description"></p>
 
                 <h3>Beneficios principales:</h3>
-                <ul id="benefits" style="max-width: 420px; margin: 0 auto 30px; text-align: left;"></ul>
+                <ul id="benefits"></ul>
 
                 <h3>Ejemplos de empresas mexicanas:</h3>
-                <p id="examples" style="font-size: 1.25em; color: var(--primary); font-weight: 700;"></p>
+                <p id="examples" style="font-weight: bold; color: #c62828; font-size: 1.2em;"></p>
 
-                <button onclick="reiniciarJuego()" style="margin-top: 20px; padding: 18px 40px; font-size: 1.15em;">
+                <button onclick="reiniciarJuego()" style="margin-top: 25px; width: 100%; padding: 18px;">
                     Realizar el test nuevamente
                 </button>
             </div>
@@ -192,58 +205,48 @@
 
     <script>
         const preguntas = [
-            {
-                pregunta: "En el trabajo, ¿qué valoras más?",
-                opciones: [
-                    { texto: "Sentirme parte de una familia y que me apoyen", valor: "familiar" },
-                    { texto: "Poder proponer ideas nuevas y creativas", valor: "creativa" },
-                    { texto: "Ganar, competir y obtener buenos resultados", valor: "competitiva" },
-                    { texto: "Que todo esté bien organizado y con reglas claras", valor: "estructurada" }
-                ]
-            },
-            {
-                pregunta: "Cuando hay un problema en la empresa, ¿qué prefieres?",
-                opciones: [
-                    { texto: "Que todos nos reunamos y lo resolvamos juntos como equipo", valor: "familiar" },
-                    { texto: "Probar soluciones nuevas aunque sean arriesgadas", valor: "creativa" },
-                    { texto: "Que se tome la decisión que más beneficie las ventas o ganancias", valor: "competitiva" },
-                    { texto: "Seguir el procedimiento establecido y respetar la cadena de mando", valor: "estructurada" }
-                ]
-            },
-            {
-                pregunta: "¿Cómo te gustaría que sea tu jefe?",
-                opciones: [
-                    { texto: "Como un líder cercano, que se preocupe por mí", valor: "familiar" },
-                    { texto: "Alguien que motive la innovación y las ideas locas", valor: "creativa" },
-                    { texto: "Alguien exigente que me impulse a dar lo mejor", valor: "competitiva" },
-                    { texto: "Alguien claro que dé instrucciones precisas y justas", valor: "estructurada" }
-                ]
-            },
-            {
-                pregunta: "En una empresa ideal, ¿qué es más importante?",
-                opciones: [
-                    { texto: "La lealtad y el buen ambiente entre compañeros", valor: "familiar" },
-                    { texto: "La creatividad y adaptarse rápido a los cambios", valor: "creativa" },
-                    { texto: "Ser mejor que la competencia y crecer constantemente", valor: "competitiva" },
-                    { texto: "La eficiencia, el orden y el control de procesos", valor: "estructurada" }
-                ]
-            },
-            {
-                pregunta: "Cuando hay un cambio grande en la empresa, ¿cómo reaccionas?",
-                opciones: [
-                    { texto: "Me preocupa si afecta al equipo y las relaciones", valor: "familiar" },
-                    { texto: "¡Me emociona! Es una oportunidad para innovar", valor: "creativa" },
-                    { texto: "Lo veo como una oportunidad para ganar más mercado", valor: "competitiva" },
-                    { texto: "Prefiero que se planee bien y se comunique claramente", valor: "estructurada" }
-                ]
-            }
+            { pregunta: "En el trabajo, ¿qué valoras más?", 
+              opciones: [
+                { texto: "Sentirme parte de una familia y que me apoyen", valor: "familiar" },
+                { texto: "Poder proponer ideas nuevas y creativas", valor: "creativa" },
+                { texto: "Ganar, competir y obtener buenos resultados", valor: "competitiva" },
+                { texto: "Que todo esté bien organizado y con reglas claras", valor: "estructurada" }
+            ]},
+            { pregunta: "Cuando hay un problema en la empresa, ¿qué prefieres?", 
+              opciones: [
+                { texto: "Que todos nos reunamos y lo resolvamos juntos como equipo", valor: "familiar" },
+                { texto: "Probar soluciones nuevas aunque sean arriesgadas", valor: "creativa" },
+                { texto: "Que se tome la decisión que más beneficie las ventas o ganancias", valor: "competitiva" },
+                { texto: "Seguir el procedimiento establecido y respetar la cadena de mando", valor: "estructurada" }
+            ]},
+            { pregunta: "¿Cómo te gustaría que sea tu jefe?", 
+              opciones: [
+                { texto: "Como un líder cercano, que se preocupe por mí", valor: "familiar" },
+                { texto: "Alguien que motive la innovación y las ideas locas", valor: "creativa" },
+                { texto: "Alguien exigente que me impulse a dar lo mejor", valor: "competitiva" },
+                { texto: "Alguien claro que dé instrucciones precisas y justas", valor: "estructurada" }
+            ]},
+            { pregunta: "En una empresa ideal, ¿qué es más importante?", 
+              opciones: [
+                { texto: "La lealtad y el buen ambiente entre compañeros", valor: "familiar" },
+                { texto: "La creatividad y adaptarse rápido a los cambios", valor: "creativa" },
+                { texto: "Ser mejor que la competencia y crecer constantemente", valor: "competitiva" },
+                { texto: "La eficiencia, el orden y el control de procesos", valor: "estructurada" }
+            ]},
+            { pregunta: "Cuando hay un cambio grande en la empresa, ¿cómo reaccionas?", 
+              opciones: [
+                { texto: "Me preocupa si afecta al equipo y las relaciones", valor: "familiar" },
+                { texto: "¡Me emociona! Es una oportunidad para innovar", valor: "creativa" },
+                { texto: "Lo veo como una oportunidad para ganar más mercado", valor: "competitiva" },
+                { texto: "Prefiero que se planee bien y se comunique claramente", valor: "estructurada" }
+            ]}
         ];
 
         let respuestas = [];
         let preguntaActual = 0;
 
         function actualizarProgreso() {
-            const porcentaje = ((preguntaActual) / preguntas.length) * 100;
+            const porcentaje = ((preguntaActual + 1) / preguntas.length) * 100;
             document.getElementById("progress-bar").style.width = `${porcentaje}%`;
         }
 
@@ -267,12 +270,9 @@
 
         function seleccionarRespuesta(index) {
             respuestas[preguntaActual] = preguntas[preguntaActual].opciones[index].valor;
-
-            const options = document.querySelectorAll(".option");
-            options.forEach((opt, i) => {
+            document.querySelectorAll(".option").forEach((opt, i) => {
                 opt.classList.toggle("selected", i === index);
             });
-
             actualizarBotones();
         }
 
@@ -301,69 +301,55 @@
 
         function calcularCultura() {
             const conteo = { familiar: 0, creativa: 0, competitiva: 0, estructurada: 0 };
-            respuestas.forEach(res => conteo[res]++);
-            
-            let max = -1;
-            let culturaGanadora = "familiar";
-            for (let tipo in conteo) {
-                if (conteo[tipo] > max) {
-                    max = conteo[tipo];
-                    culturaGanadora = tipo;
-                }
-            }
-            return culturaGanadora;
+            respuestas.forEach(r => conteo[r]++);
+            return Object.keys(conteo).reduce((a, b) => conteo[a] > conteo[b] ? a : b);
         }
 
         function mostrarResultado() {
             document.getElementById("quiz").style.display = "none";
-            document.getElementById("result").style.display = "block";
+            const result = document.getElementById("result");
+            result.style.display = "block";
 
             const tipo = calcularCultura();
-            let titulo = "", emoji = "", descripcion = "", beneficios = [], ejemplos = "";
+            let titulo = "", emoji = "", desc = "", beneficios = [], ejemplos = "";
 
-            switch(tipo) {
-                case "familiar":
-                    titulo = "Cultura Familiar"; emoji = "👨‍👩‍👧‍👦";
-                    descripcion = "Es como trabajar en una gran familia. Se valora mucho la confianza, el apoyo mutuo y la lealtad.";
-                    beneficios = ["Alta motivación y compromiso", "Baja rotación de personal", "Buen clima laboral"];
-                    ejemplos = "Grupo Bimbo, FEMSA (OXXO), Liverpool";
-                    break;
-                case "creativa":
-                    titulo = "Cultura Creativa"; emoji = "💡";
-                    descripcion = "Se fomenta la creatividad, las ideas nuevas y la capacidad de adaptarse rápidamente.";
-                    beneficios = ["Alta innovación", "Adaptación rápida al mercado", "Ambiente dinámico"];
-                    ejemplos = "Cinépolis, Kavak, Clip";
-                    break;
-                case "competitiva":
-                    titulo = "Cultura Competitiva"; emoji = "🏆";
-                    descripcion = "Se enfoca en los resultados, la competencia y en ser los mejores del mercado.";
-                    beneficios = ["Crecimiento rápido", "Alta productividad", "Recompensas por desempeño"];
-                    ejemplos = "América Móvil (Telcel), Grupo Salinas";
-                    break;
-                case "estructurada":
-                    titulo = "Cultura Estructurada"; emoji = "📋";
-                    descripcion = "Todo está bien organizado, con procesos claros, reglas definidas y orden.";
-                    beneficios = ["Estabilidad", "Eficiencia operativa", "Claridad en roles"];
-                    ejemplos = "Banorte, Cemex";
-                    break;
+            if (tipo === "familiar") {
+                titulo = "Cultura Familiar"; emoji = "👨‍👩‍👧‍👦";
+                desc = "Es como trabajar en una gran familia. Se valora la confianza, el apoyo y la lealtad.";
+                beneficios = ["Alta motivación", "Baja rotación", "Buen clima laboral"];
+                ejemplos = "Grupo Bimbo, FEMSA, Liverpool";
+            } else if (tipo === "creativa") {
+                titulo = "Cultura Creativa"; emoji = "💡";
+                desc = "Ambiente que fomenta la creatividad y la innovación constante.";
+                beneficios = ["Alta innovación", "Adaptación rápida", "Ambiente dinámico"];
+                ejemplos = "Kavak, Clip, Cinépolis";
+            } else if (tipo === "competitiva") {
+                titulo = "Cultura Competitiva"; emoji = "🏆";
+                desc = "Enfocada en resultados, competencia y alto desempeño.";
+                beneficios = ["Crecimiento rápido", "Alta productividad", "Recompensas por metas"];
+                ejemplos = "América Móvil, Grupo Salinas";
+            } else {
+                titulo = "Cultura Estructurada"; emoji = "📋";
+                desc = "Procesos claros, orden y estabilidad.";
+                beneficios = ["Estabilidad", "Eficiencia", "Roles bien definidos"];
+                ejemplos = "Banorte, Cemex";
             }
 
             document.getElementById("culture-result").innerHTML = `
-                <span style="font-size: 5.5em; display: block; margin-bottom: 15px;">${emoji}</span>
-                <h2 style="color: #c62828; margin-bottom: 20px;">${titulo}</h2>
+                <span class="emoji">${emoji}</span>
+                <h2>${titulo}</h2>
             `;
+            document.getElementById("description").textContent = desc;
 
-            document.getElementById("description").textContent = descripcion;
-
-            const benefitsList = document.getElementById("benefits");
-            benefitsList.innerHTML = "";
+            const ul = document.getElementById("benefits");
+            ul.innerHTML = "";
             beneficios.forEach(b => {
                 const li = document.createElement("li");
                 li.textContent = "• " + b;
-                benefitsList.appendChild(li);
+                ul.appendChild(li);
             });
 
-            document.getElementById("examples").innerHTML = ejemplos;
+            document.getElementById("examples").textContent = ejemplos;
         }
 
         function reiniciarJuego() {
@@ -374,7 +360,6 @@
             mostrarPregunta();
         }
 
-        // Iniciar
         window.onload = mostrarPregunta;
     </script>
 </body>
