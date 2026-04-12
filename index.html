@@ -27,8 +27,11 @@
             text-align: center;
         }
         .logo {
-            max-width: 160px;     /* Logo más pequeño como pediste */
+            max-width: 180px;
             margin-bottom: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
         h1 {
             margin: 8px 0 5px 0;
@@ -104,38 +107,36 @@
             font-size: 3.8em;
             margin-bottom: 10px;
         }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <img src="logo_utel_con_fondo-removebg-preview.png" alt="Logo UTEL" class="logo">
+            <img src="https://static.utel.edu.mx/img/logo-utel.png" alt="Logo UTEL" class="logo">
             <h1>¿Qué Cultura Eres?</h1>
             <p class="subtitle">Empresas Mexicanas Edition 🇲🇽</p>
         </header>
 
         <div class="content">
-            <!-- Cuestionario -->
             <div id="quiz">
                 <h2 id="question-text">Pregunta 1 de 5</h2>
                 <div class="options" id="options"></div>
                 <button onclick="nextQuestion()" id="next-btn" style="display:none;">Siguiente →</button>
             </div>
 
-            <!-- Resultado -->
             <div id="result" class="result">
                 <h2>¡Felicidades! Tu cultura es:</h2>
                 <div id="culture-result" class="culture-card"></div>
-                
                 <h3>¿Qué significa esto?</h3>
                 <p id="description"></p>
-                
                 <h3>Beneficios principales:</h3>
                 <ul id="benefits"></ul>
-                
                 <h3>Ejemplos de empresas mexicanas:</h3>
                 <p id="examples" style="font-weight: bold; color: #d32f2f; font-size: 1.1em;"></p>
-
                 <button onclick="reiniciarJuego()">Jugar de nuevo</button>
             </div>
         </div>
@@ -211,13 +212,11 @@
 
         function seleccionarRespuesta(index) {
             respuestas[preguntaActual] = preguntas[preguntaActual].opciones[index].valor;
-            
             const options = document.querySelectorAll(".option");
             options.forEach((opt, i) => {
                 if (i === index) opt.classList.add("selected");
                 else opt.classList.remove("selected");
             });
-
             document.getElementById("next-btn").style.display = "block";
         }
 
@@ -233,7 +232,6 @@
         function calcularCultura() {
             const conteo = { familiar: 0, creativa: 0, competitiva: 0, estructurada: 0 };
             respuestas.forEach(res => conteo[res]++);
-            
             let max = 0;
             let culturaGanadora = "familiar";
             for (let tipo in conteo) {
@@ -281,7 +279,6 @@
 
             document.getElementById("culture-result").innerHTML = `<span class="emoji">${emoji}</span><h2>${titulo}</h2>`;
             document.getElementById("description").textContent = descripcion;
-            
             const benefitsList = document.getElementById("benefits");
             benefitsList.innerHTML = "";
             beneficios.forEach(b => {
@@ -289,7 +286,6 @@
                 li.textContent = "• " + b;
                 benefitsList.appendChild(li);
             });
-
             document.getElementById("examples").textContent = ejemplos;
         }
 
@@ -301,7 +297,6 @@
             mostrarPregunta();
         }
 
-        // Iniciar
         window.onload = mostrarPregunta;
     </script>
 </body>
